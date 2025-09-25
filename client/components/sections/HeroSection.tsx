@@ -132,7 +132,7 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
             className="flex flex-col smflex-row items-center mt-10 justify-center gap-4 sm:gap-8 lg:gap-5 px-4 sm:px-8 lg:px-12 py-6 backdrop-blur-sm border border-[#472F91] rounded-2xl  mx-auto"
             style={{ backgroundColor: "rgba(0,0,0,0.16)" }}
           >
-            <StaggerContainer className="flex gap-5 flex-col  md:flex-row">
+            <StaggerContainer className="flex gap-5 ">
               {heroStats.map((stat, index) => (
                 <StaggerItem
                   key={index}
