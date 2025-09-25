@@ -87,16 +87,31 @@ export function Header({
                 {language.toUpperCase()}
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-32">
+            <DropdownMenuContent
+              align="end"
+              className="w-32 bg-gradient-to-br from-[#0D0D5D] via-[#000037] to-[#93278F] border border-[#472F91] shadow-xl rounded-lg backdrop-blur-sm"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(13, 13, 93, 0.95) 0%, rgba(0, 0, 55, 0.95) 50%, rgba(147, 39, 143, 0.95) 100%)",
+              }}
+            >
               <DropdownMenuItem
                 onClick={() => setLanguage("de")}
-                className={language === "de" ? "bg-primary-50" : ""}
+                className={`cursor-pointer transition-all duration-200 rounded-md mx-1 my-1 ${
+                  language === "de"
+                    ? "bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white"
+                    : "text-white hover:bg-white/10"
+                }`}
               >
                 🇩🇪 Deutsch
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => setLanguage("en")}
-                className={language === "en" ? "bg-primary-50" : ""}
+                className={`cursor-pointer transition-all duration-200 rounded-md mx-1 my-1 ${
+                  language === "en"
+                    ? "bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white"
+                    : "text-white hover:bg-white/10"
+                }`}
               >
                 🇬🇧 English
               </DropdownMenuItem>
@@ -137,9 +152,16 @@ export function Header({
               <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+          <SheetContent
+            side="right"
+            className="w-[300px] sm:w-[400px] bg-gradient-to-br from-[#0D0D5D] via-[#000037] to-[#93278F] border-[#472F91]"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(13, 13, 93, 0.95) 0%, rgba(0, 0, 55, 0.95) 50%, rgba(147, 39, 143, 0.95) 100%)",
+            }}
+          >
             <SheetHeader>
-              <SheetTitle className="text-left text-lg font-grotesk">
+              <SheetTitle className="text-left text-lg font-grotesk text-white">
                 {t("common.menu")}
               </SheetTitle>
             </SheetHeader>
@@ -150,7 +172,11 @@ export function Header({
                   variant={language === "de" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setLanguage("de")}
-                  className="flex-1"
+                  className={`flex-1 rounded-full font-grotesk transition-all duration-200 ${
+                    language === "de"
+                      ? "bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white border-none hover:scale-105"
+                      : "border-[#472F91] bg-transparent text-white hover:bg-white/10 hover:text-white"
+                  }`}
                 >
                   🇩🇪 Deutsch
                 </Button>
@@ -158,7 +184,11 @@ export function Header({
                   variant={language === "en" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setLanguage("en")}
-                  className="flex-1"
+                  className={`flex-1 rounded-full font-grotesk transition-all duration-200 ${
+                    language === "en"
+                      ? "bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white border-none hover:scale-105"
+                      : "border-[#472F91] bg-transparent text-white hover:bg-white/10 hover:text-white"
+                  }`}
                 >
                   🇬🇧 English
                 </Button>
@@ -170,7 +200,7 @@ export function Header({
                   <a
                     key={item.label}
                     href={item.href}
-                    className="text-lg font-grotesk capitalize text-gray-700 hover:text-primary-500 transition-colors py-2"
+                    className="text-lg font-grotesk capitalize text-white/80 hover:text-white transition-all duration-200 py-3 px-4 rounded-lg hover:bg-white/10 backdrop-blur-sm"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.label}
@@ -182,7 +212,7 @@ export function Header({
               <Button
                 variant="outline"
                 size="lg"
-                className="border-[#472F91] bg-transparent hover:bg-primary-500 hover:text-white text-primary-500 rounded-full text-sm font-grotesk capitalize transition-colors mt-4"
+                className="bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white border-none hover:scale-105 rounded-full text-sm font-grotesk capitalize transition-all duration-200 mt-4 shadow-lg"
                 onClick={() => setIsOpen(false)}
               >
                 {t("nav.contactUs")}
