@@ -13,8 +13,8 @@ export function Footer() {
 
   return (
     <footer className="bg-gray-50  py-12 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-8 md:px-16">
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+      <div className="container mx-auto  ">
+        <StaggerContainer className="flex flex-col sm:flex-row justify-between gap-8 mb-8 sm:mb-12 w-full ">
           {/* Company Info */}
           <StaggerItem className="col-span-1 sm:col-span-2 lg:col-span-2">
             <FadeInUp delay={0.2}>
@@ -39,45 +39,49 @@ export function Footer() {
           </StaggerItem>
 
           {/* Services */}
-          <StaggerItem>
-            <FadeInUp delay={0.6}>
-              <h4 className="text-lg sm:text-xl font-semibold font-grotesk text-secondary-500 mb-6 sm:mb-8">
-                Services
-              </h4>
-            </FadeInUp>
-            <StaggerContainer className="space-y-4 sm:space-y-6 text-red-500">
-              {footerLinks.services.map((item, index) => (
-                <StaggerItem key={index}>
-                  <a
-                    href="#"
-                    className="block text-sm sm:text-base font-grotesk text-secondary-400 hover:text-secondary-700 transition-colors duration-200"
-                  >
-                    {item}
-                  </a>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
-          </StaggerItem>
 
-          {/* Socials */}
-          <StaggerItem>
-            <FadeInUp delay={0.8}>
-              <h4 className="text-lg sm:text-xl font-semibold font-grotesk text-secondary-500 mb-6 sm:mb-8">
-                Socials
-              </h4>
-            </FadeInUp>
-            <StaggerContainer className="space-y-4 sm:space-y-6">
-              {footerLinks.socials.map((item, index) => (
-                <StaggerItem key={index}>
-                  <a
-                    href="#"
-                    className="block text-sm sm:text-base font-grotesk text-secondary-400 hover:text-secondary-700 transition-colors duration-200"
-                  >
-                    {item}
-                  </a>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
+          <StaggerItem className="flex justify-start items-start w-full  md:w-[60%]">
+            <div className="w-full">
+              <FadeInUp delay={0.6}>
+                <h4 className="text-lg sm:text-xl font-semibold font-grotesk text-secondary-500 mb-6 sm:mb-8">
+                  Services
+                </h4>
+              </FadeInUp>
+              <StaggerContainer className="space-y-4 sm:space-y-6 text-red-500">
+                {footerLinks.services.map((item, index) => (
+                  <StaggerItem key={index}>
+                    <a
+                      href="#"
+                      className="block text-sm sm:text-base font-grotesk text-secondary-400 hover:text-secondary-700 transition-colors duration-200"
+                    >
+                      {item}
+                    </a>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+
+            {/* Socials */}
+
+            <div className="w-full">
+              <FadeInUp delay={0.8}>
+                <h4 className="text-lg sm:text-xl font-semibold font-grotesk text-secondary-500 mb-6 sm:mb-8">
+                  Socials
+                </h4>
+              </FadeInUp>
+              <StaggerContainer className="space-y-4 sm:space-y-6">
+                {footerLinks.socials.map((item, index) => (
+                  <StaggerItem key={index}>
+                    <a
+                      href="#"
+                      className="block text-sm sm:text-base font-grotesk text-secondary-400 hover:text-secondary-700 transition-colors duration-200"
+                    >
+                      {item}
+                    </a>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
           </StaggerItem>
         </StaggerContainer>
 

@@ -126,7 +126,7 @@ export function FadeInUp({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: false, margin: "-100px" }}
       variants={fadeInUp}
       transition={{ delay, duration }}
       className={className}
@@ -146,7 +146,7 @@ export function FadeInLeft({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: false, margin: "-100px" }}
       variants={fadeInLeft}
       transition={{ delay, duration }}
       className={className}
@@ -166,7 +166,7 @@ export function FadeInRight({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: false, margin: "-100px" }}
       variants={fadeInRight}
       transition={{ delay, duration }}
       className={className}
@@ -186,7 +186,7 @@ export function FadeInScale({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: false, margin: "-100px" }}
       variants={fadeInScale}
       transition={{ delay, duration }}
       className={className}
@@ -206,7 +206,7 @@ export function SlideInFromBottom({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: false, margin: "-100px" }}
       variants={slideInFromBottom}
       transition={{ delay, duration }}
       className={className}
@@ -227,7 +227,7 @@ export function StaggerContainer({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: false, margin: "-100px" }}
       variants={staggerContainer}
       className={className}
     >

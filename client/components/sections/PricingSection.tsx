@@ -129,7 +129,7 @@ export function PricingSection({
                 >
                   <div className="flex items-center gap-3 mb-4 sm:mb-6">
                     <plan.icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary-500" />
-                    <h3 className="text-2xl sm:text-[28px] font-semibold font-grotesk text-secondary-700">
+                    <h3 className="text-2xl sm:text-[28px] font-semibold font-grotesk whitespace-nowrap text-secondary-700">
                       {plan.title}
                     </h3>
                   </div>
