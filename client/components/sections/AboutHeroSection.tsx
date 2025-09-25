@@ -45,10 +45,14 @@ export function AboutHeroSection({ heroRef }: AboutHeroSectionProps) {
         <div className="h-[454px] bg-black rounded-[32px] relative overflow-hidden">
           <div className="absolute inset-0">
             {/* Abstract network pattern */}
-            <StaggerContainer className="absolute inset-0">
+            <StaggerContainer className="absolute min-h-[454px] w-full h-full inset-0">
               {/* Dense pattern on the left side */}
-              <StaggerItem>
-                <img src={network} alt="network" className="w-full h-full" />
+              <StaggerItem className="w-full h-full">
+                <img
+                  src={network}
+                  alt="network"
+                  className="w-full h-full object-cover"
+                />
               </StaggerItem>
             </StaggerContainer>
           </div>
