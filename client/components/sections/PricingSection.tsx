@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check, Heart, Zap, Crown } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FadeInUp,
   StaggerContainer,
@@ -34,6 +34,20 @@ export function PricingSection({
   addonServicesRef,
 }: PricingSectionProps) {
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
+  const [animatedPrices, setAnimatedPrices] = useState({
+    starterOneTime: 0,
+    starterAnnual: 0,
+    businessOneTime: 0,
+    businessAnnual: 0,
+    ecommOneTime: 0,
+    ecommAnnual: 0,
+  });
+  const [animatedAddonPrices, setAnimatedAddonPrices] = useState({
+    logo: 0,
+    copywriting: 0,
+    dataProtection: 0,
+    multilingual: 0,
+  });
 
   const pricingPlans: PricingPlan[] = [
     {
@@ -98,6 +112,79 @@ export function PricingSection({
     { name: "Multilingual Support", icons: [Heart, Zap, Crown], price: "490" },
   ];
 
+  useEffect(() => {
+    // Animate pricing plans counter
+    const animatePrices = () => {
+      const duration = 2000;
+      const steps = 60;
+      const stepDuration = duration / steps;
+
+      let step = 0;
+      const timer = setInterval(() => {
+        step++;
+        const progress = step / steps;
+
+        setAnimatedPrices({
+          starterOneTime: Math.floor(790 * progress),
+          starterAnnual: Math.floor(290 * progress),
+          businessOneTime: Math.floor(1490 * progress),
+          businessAnnual: Math.floor(390 * progress),
+          ecommOneTime: Math.floor(790 * progress),
+          ecommAnnual: Math.floor(290 * progress),
+        });
+
+        if (step >= steps) {
+          clearInterval(timer);
+          setAnimatedPrices({
+            starterOneTime: 790,
+            starterAnnual: 290,
+            businessOneTime: 1490,
+            businessAnnual: 390,
+            ecommOneTime: 790,
+            ecommAnnual: 290,
+          });
+        }
+      }, stepDuration);
+    };
+
+    // Animate addon services counter
+    const animateAddonPrices = () => {
+      const duration = 2000;
+      const steps = 60;
+      const stepDuration = duration / steps;
+
+      let step = 0;
+      const timer = setInterval(() => {
+        step++;
+        const progress = step / steps;
+
+        setAnimatedAddonPrices({
+          logo: Math.floor(390 * progress),
+          copywriting: Math.floor(120 * progress),
+          dataProtection: Math.floor(180 * progress),
+          multilingual: Math.floor(490 * progress),
+        });
+
+        if (step >= steps) {
+          clearInterval(timer);
+          setAnimatedAddonPrices({
+            logo: 390,
+            copywriting: 120,
+            dataProtection: 180,
+            multilingual: 490,
+          });
+        }
+      }, stepDuration);
+    };
+
+    const timer1 = setTimeout(animatePrices, 500);
+    const timer2 = setTimeout(animateAddonPrices, 1000);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
+
   return (
     <section ref={packagesRef} className="py-16 sm:py-20 md:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-8 md:px-16">
@@ -141,7 +228,12 @@ export function PricingSection({
                   <div className="mb-4 sm:mb-6">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-3xl sm:text-4xl font-semibold font-grotesk text-secondary-700">
-                        {plan.oneTime.toLocaleString()}
+                        {index === 0 &&
+                          animatedPrices.starterOneTime.toLocaleString()}
+                        {index === 1 &&
+                          animatedPrices.businessOneTime.toLocaleString()}
+                        {index === 2 &&
+                          animatedPrices.ecommOneTime.toLocaleString()}
                       </span>
                       <span className="text-base sm:text-lg font-grotesk text-secondary-400">
                         CHF one time
@@ -149,7 +241,9 @@ export function PricingSection({
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-3xl sm:text-4xl font-semibold font-grotesk text-secondary-700">
-                        {plan.annual}
+                        {index === 0 && animatedPrices.starterAnnual}
+                        {index === 1 && animatedPrices.businessAnnual}
+                        {index === 2 && animatedPrices.ecommAnnual}
                       </span>
                       <span className="text-base sm:text-lg font-grotesk text-secondary-400">
                         CHF annually
@@ -226,7 +320,10 @@ export function PricingSection({
                         CHF
                       </span>
                       <span className="text-3xl sm:text-4xl font-semibold font-grotesk text-secondary-700">
-                        {service.price}
+                        {index === 0 && animatedAddonPrices.logo}
+                        {index === 1 && animatedAddonPrices.copywriting}
+                        {index === 2 && animatedAddonPrices.dataProtection}
+                        {index === 3 && animatedAddonPrices.multilingual}
                       </span>
                     </div>
                   </div>

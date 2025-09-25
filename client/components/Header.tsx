@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import {
   Sheet,
@@ -29,8 +30,8 @@ export function Header({
   const { language, setLanguage, t } = useLanguage();
 
   const navigationItems = [
-    { label: t("nav.home"), href: "#" },
-    { label: t("nav.about"), href: "#" },
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.about"), href: "/about" },
     { label: t("nav.services"), href: "#" },
     { label: t("nav.contact"), href: "#" },
   ];
@@ -57,13 +58,13 @@ export function Header({
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-8 xl:space-x-12">
           {navigationItems.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
+              to={item.href}
               className={`text-sm font-grotesk capitalize transition-colors ${textColor} ${hoverColor}`}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -197,14 +198,14 @@ export function Header({
               {/* Mobile Navigation */}
               <nav className="flex flex-col space-y-4">
                 {navigationItems.map((item) => (
-                  <a
+                  <Link
                     key={item.label}
-                    href={item.href}
+                    to={item.href}
                     className="text-lg font-grotesk capitalize text-white/80 hover:text-white transition-all duration-200 py-3 px-4 rounded-lg hover:bg-white/10 backdrop-blur-sm"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </nav>
 
