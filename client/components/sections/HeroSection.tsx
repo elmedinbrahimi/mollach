@@ -81,7 +81,7 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
   return (
     <section
       ref={heroRef}
-      className="relative pt-24 pb-16 overflow-x-hidden min-h-screen"
+      className="relative pt-24 pb-16 overflow-x-hidden min-h-[93vh]"
       style={{
         background:
           "linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), radial-gradient(85.35% 142.1% at 55.91% 154.47%, #93278F 0%, #0D0D5D 54%, #000037 100%)",
