@@ -1,7 +1,6 @@
 {
-  "buildCommand": "npm run build:client",
+  "buildCommand": "npm run vercel-build",
   "outputDirectory": "dist/spa",
-  "framework": null,
   "rewrites": [
     {
       "source": "/(.*)",
