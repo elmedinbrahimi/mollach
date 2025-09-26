@@ -109,7 +109,7 @@ export function WhatWereBestAtSection({
 
           {/* Fifth Service - Data Protection (spans 2 columns on large screens) */}
           <StaggerItem className="md:col-span-2 lg:col-span-1">
-            <HoverScale>
+            <HoverScale className="h-full">
               <Card className="bg-secondary-700/50 backdrop-blur-sm border border-secondary-500/20 rounded-2xl p-8 h-full hover:bg-secondary-600/50 transition-all duration-300 group transform-gpu">
                 <div
                   className={`w-16 h-16 bg-gradient-to-r ${services[4].gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
@@ -132,7 +132,7 @@ export function WhatWereBestAtSection({
 
           {/* Looking for more card */}
           <StaggerItem>
-            <HoverScale>
+            <HoverScale className="h-full">
               <Card className="bg-secondary-700/50 backdrop-blur-sm border border-secondary-500/20 rounded-2xl p-8 h-full hover:bg-secondary-600/50 transition-all duration-300 group transform-gpu">
                 <h3 className="text-2xl font-bold font-grotesk text-white mb-4">
                   Looking for more?
