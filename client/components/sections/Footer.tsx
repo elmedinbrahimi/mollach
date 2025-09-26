@@ -12,7 +12,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-gray-50  py-12 sm:py-16">
+    <footer className="bg-gray-50  py-12 sm:pt-16">
       <div className="container mx-auto  ">
         <StaggerContainer className="flex flex-col sm:flex-row justify-between gap-8 mb-8 sm:mb-12 w-full ">
           {/* Company Info */}
