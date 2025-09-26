@@ -155,7 +155,11 @@ export function Header({
           </SheetTrigger>
           <SheetContent
             side="right"
-            className="w-full bg-gradient-to-br from-[#0D0D5D] via-[#000037] to-[#370335] border-[#472F91]"
+            className="w-full border-0"
+            style={{
+              background:
+                "linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), radial-gradient(85.35% 142.1% at 55.91% 154.47%, #93278F 0%, #0D0D5D 54%, #000037 100%)",
+            }}
           >
             <div className="flex items-center justify-between">
               <SheetHeader className="flex items-center mb-4">
@@ -174,48 +178,50 @@ export function Header({
               </SheetHeader>
             </div>
 
-            <div className="flex flex-col space-y-6 mt-8">
+            <div className="flex flex-col justify-between h-[75vh] space-y-6 mt-8">
               {/* Mobile Language Switcher */}
-              <div className="flex gap-2">
-                <Button
-                  variant={language === "de" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setLanguage("de")}
-                  className={`flex-1 rounded-full font-grotesk transition-all duration-200 ${
-                    language === "de"
-                      ? "bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white border-none hover:scale-105"
-                      : "border-[#472F91] bg-transparent text-white hover:bg-white/10 hover:text-white"
-                  }`}
-                >
-                  🇩🇪 Deutsch
-                </Button>
-                <Button
-                  variant={language === "en" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setLanguage("en")}
-                  className={`flex-1 rounded-full font-grotesk transition-all duration-200 ${
-                    language === "en"
-                      ? "bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white border-none hover:scale-105"
-                      : "border-[#472F91] bg-transparent text-white hover:bg-white/10 hover:text-white"
-                  }`}
-                >
-                  🇬🇧 English
-                </Button>
+              <div>
+                <div className="flex gap-2">
+                  <Button
+                    variant={language === "de" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setLanguage("de")}
+                    className={`flex-1 rounded-full font-grotesk transition-all duration-200 ${
+                      language === "de"
+                        ? "bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white border-none hover:scale-105"
+                        : "border-[#472F91] bg-transparent text-white hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    🇩🇪 Deutsch
+                  </Button>
+                  <Button
+                    variant={language === "en" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setLanguage("en")}
+                    className={`flex-1 rounded-full font-grotesk transition-all duration-200 ${
+                      language === "en"
+                        ? "bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white border-none hover:scale-105"
+                        : "border-[#472F91] bg-transparent text-white hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    🇬🇧 English
+                  </Button>
+                </div>
+                <nav className="flex flex-col space-y-4 mt-7">
+                  {navigationItems.map((item) => (
+                    <Link
+                      key={item.label}
+                      to={item.href}
+                      className="text-lg font-grotesk capitalize text-white/80 hover:text-white transition-all duration-200 py-3 px-4 rounded-lg hover:bg-white/10 backdrop-blur-sm"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
               </div>
 
               {/* Mobile Navigation */}
-              <nav className="flex flex-col space-y-4">
-                {navigationItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className="text-lg font-grotesk capitalize text-white/80 hover:text-white transition-all duration-200 py-3 px-4 rounded-lg hover:bg-white/10 backdrop-blur-sm"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
 
               {/* Mobile Contact Button */}
               <Button
