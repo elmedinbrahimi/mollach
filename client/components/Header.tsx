@@ -32,7 +32,7 @@ export function Header({
   const navigationItems = [
     { label: t("nav.home"), href: "/" },
     { label: t("nav.about"), href: "/about" },
-    { label: t("nav.services"), href: "#" },
+    { label: t("nav.services"), href: "/services" },
     { label: t("nav.contact"), href: "#" },
   ];
 
@@ -155,17 +155,25 @@ export function Header({
           </SheetTrigger>
           <SheetContent
             side="right"
-            className="w-[300px] sm:w-[400px] bg-gradient-to-br from-[#0D0D5D] via-[#000037] to-[#93278F] border-[#472F91]"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(13, 13, 93, 0.95) 0%, rgba(0, 0, 55, 0.95) 50%, rgba(147, 39, 143, 0.95) 100%)",
-            }}
+            className="w-full bg-gradient-to-br from-[#0D0D5D] via-[#000037] to-[#370335] border-[#472F91]"
           >
-            <SheetHeader>
-              <SheetTitle className="text-left text-lg font-grotesk text-white">
-                {t("common.menu")}
-              </SheetTitle>
-            </SheetHeader>
+            <div className="flex items-center justify-between">
+              <SheetHeader className="flex items-center mb-4">
+                <SheetTitle className="text-left text-lg font-grotesk text-white">
+                  {t("common.menu")}
+                </SheetTitle>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="ml-auto text-white hover:bg-white/10 hover:text-white"
+                  onClick={() => setIsOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <X className="h-6 w-6" />
+                </Button>
+              </SheetHeader>
+            </div>
+
             <div className="flex flex-col space-y-6 mt-8">
               {/* Mobile Language Switcher */}
               <div className="flex gap-2">

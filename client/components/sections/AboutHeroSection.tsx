@@ -4,7 +4,7 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/ui/animation";
-import network from "../../../assets/network.png";
+import network1 from "../../../assets/network.png";
 
 interface AboutHeroSectionProps {
   heroRef: React.RefObject<HTMLDivElement>;
@@ -49,7 +49,7 @@ export function AboutHeroSection({ heroRef }: AboutHeroSectionProps) {
               {/* Dense pattern on the left side */}
               <StaggerItem className="w-full h-full">
                 <img
-                  src={network}
+                  src={network1}
                   alt="network"
                   className="w-full h-full object-cover"
                 />

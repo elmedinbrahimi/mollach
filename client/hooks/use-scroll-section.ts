@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
 export function useScrollSection() {
   const [isDarkBackground, setIsDarkBackground] = useState(false);
@@ -9,11 +10,13 @@ export function useScrollSection() {
   const journeyRef = useRef<HTMLDivElement>(null);
   const packagesRef = useRef<HTMLDivElement>(null);
   const addonServicesRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
+      const isServicesPage = location.pathname === "/services";
 
       // Get section positions
       const heroTop = heroRef.current?.offsetTop || 0;
@@ -21,27 +24,46 @@ export function useScrollSection() {
       const servicesBottom =
         servicesTop + (servicesRef.current?.offsetHeight || 0);
       const whyMollaTop = whyMollaRef.current?.offsetTop || 0;
+      const whyMollaBottom =
+        whyMollaTop + (whyMollaRef.current?.offsetHeight || 0);
       const journeyTop = journeyRef.current?.offsetTop || 0;
       const journeyBottom =
         journeyTop + (journeyRef.current?.offsetHeight || 0);
 
-      // Check if over Contact section
-      const isOverContactSection =
-        scrollY + 100 >= journeyTop && scrollY + 100 <= journeyBottom;
-      setIsOverContact(isOverContactSection);
+      if (isServicesPage) {
+        // Services page logic
+        // Check if over Contact section (Footer)
+        const isOverContactSection =
+          scrollY + 100 >= journeyTop && scrollY + 100 <= journeyBottom;
+        setIsOverContact(isOverContactSection);
 
-      // Calculate when header should be dark (when it reaches these sections)
-      // But NOT when it's over the Services section (which has dark background)
-      const isOverServices =
-        scrollY + 100 >= servicesTop && scrollY + 100 <= servicesBottom;
-      const isOverHero = scrollY < whyMollaTop; // Hero section is before Why Molla section
-      const shouldBeDark =
-        !isOverServices &&
-        !isOverHero &&
-        !isOverContactSection && // Don't make dark when over Contact section
-        scrollY + 100 >= whyMollaTop; // "Why Molla?" section only
+        // On Services page, header should be dark when over dark sections
+        // (How We Work and What We're Best At sections)
+        const isOverDarkSections =
+          (scrollY + 100 >= whyMollaTop && scrollY + 100 <= whyMollaBottom) ||
+          (scrollY + 100 >= servicesTop && scrollY + 100 <= servicesBottom);
 
-      setIsDarkBackground(shouldBeDark);
+        setIsDarkBackground(!isOverDarkSections && !isOverContactSection);
+      } else {
+        // Index page logic (original)
+        // Check if over Contact section
+        const isOverContactSection =
+          scrollY + 100 >= journeyTop && scrollY + 100 <= journeyBottom;
+        setIsOverContact(isOverContactSection);
+
+        // Calculate when header should be dark (when it reaches these sections)
+        // But NOT when it's over the Services section (which has dark background)
+        const isOverServices =
+          scrollY + 100 >= servicesTop && scrollY + 100 <= servicesBottom;
+        const isOverHero = scrollY < whyMollaTop; // Hero section is before Why Molla section
+        const shouldBeDark =
+          !isOverServices &&
+          !isOverHero &&
+          !isOverContactSection && // Don't make dark when over Contact section
+          scrollY + 100 >= whyMollaTop; // "Why Molla?" section only
+
+        setIsDarkBackground(shouldBeDark);
+      }
     };
 
     // Initial check
@@ -49,7 +71,7 @@ export function useScrollSection() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   return {
     isDarkBackground,
