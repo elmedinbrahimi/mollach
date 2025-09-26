@@ -178,7 +178,7 @@ export function Header({
               </SheetHeader>
             </div>
 
-            <div className="flex flex-col justify-between h-[75vh] space-y-6 mt-8">
+            <div className="flex flex-col justify-between h-[60vh] space-y-6 mt-8">
               {/* Mobile Language Switcher */}
               <div>
                 <div className="flex gap-2">
