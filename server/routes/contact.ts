@@ -55,6 +55,9 @@ export async function handleContactForm(
   res: Response
 ): Promise<void> {
   try {
+    console.log("🔍 [Contact Handler] Starting request processing");
+    console.log("🔍 [Contact Handler] Request body:", JSON.stringify(req.body));
+
     // Get client IP
     const clientIp =
       req.ip ||
@@ -62,19 +65,23 @@ export async function handleContactForm(
       req.socket.remoteAddress ||
       "unknown";
     const ip = Array.isArray(clientIp) ? clientIp[0] : clientIp;
+    console.log("🔍 [Contact Handler] Client IP:", ip);
 
     // Check rate limit
     if (!checkRateLimit(ip)) {
+      console.log("⚠️  [Contact Handler] Rate limit exceeded for IP:", ip);
       const response: ContactFormResponse = {
         success: false,
         message: "Rate limit exceeded",
         error: "Too many requests. Please try again later.",
       };
       res.status(429).json(response);
+      console.log("📤 [Contact Handler] Sent 429 response");
       return;
     }
 
     // Validate request body using Zod schema
+    console.log("🔍 [Contact Handler] Validating request body");
     const validationResult = contactFormSchema.safeParse(req.body);
 
     if (!validationResult.success) {
@@ -82,21 +89,28 @@ export async function handleContactForm(
         .map((err) => `${err.path.join(".")}: ${err.message}`)
         .join(", ");
 
+      console.log("❌ [Contact Handler] Validation failed:", errors);
       const response: ContactFormResponse = {
         success: false,
         message: "Validation failed",
         error: errors,
       };
       res.status(400).json(response);
+      console.log("📤 [Contact Handler] Sent 400 response");
       return;
     }
 
+    console.log("✅ [Contact Handler] Validation passed");
+
     // Send email
+    console.log("📧 [Contact Handler] Sending email...");
     const emailResult = await emailService.sendContactFormEmail(
       validationResult.data
     );
+    console.log("📧 [Contact Handler] Email result:", emailResult);
 
     if (!emailResult.success) {
+      console.log("❌ [Contact Handler] Email send failed");
       const response: ContactFormResponse = {
         success: false,
         message: "Failed to send email",
@@ -105,24 +119,36 @@ export async function handleContactForm(
           "An error occurred while processing your request",
       };
       res.status(500).json(response);
+      console.log("📤 [Contact Handler] Sent 500 response");
       return;
     }
 
     // Success response
+    console.log("✅ [Contact Handler] Email sent successfully, preparing response");
     const response: ContactFormResponse = {
       success: true,
       message: "Your message has been sent successfully. We'll get back to you soon!",
     };
+    console.log("📤 [Contact Handler] About to send response:", response);
+    console.log("🔍 [Contact Handler] Response headers sent?", res.headersSent);
     res.status(200).json(response);
+    console.log("✅ [Contact Handler] Response sent successfully");
+    console.log("🔍 [Contact Handler] Response headers sent after?", res.headersSent);
   } catch (error) {
-    console.error("❌ Error handling contact form:", error);
+    console.error("❌ [Contact Handler] Unhandled error:", error);
 
     const response: ContactFormResponse = {
       success: false,
       message: "Internal server error",
       error: "An unexpected error occurred. Please try again later.",
     };
-    res.status(500).json(response);
+
+    if (!res.headersSent) {
+      res.status(500).json(response);
+      console.log("📤 [Contact Handler] Sent 500 error response");
+    } else {
+      console.log("⚠️  [Contact Handler] Headers already sent, cannot send error response");
+    }
   }
 }
 

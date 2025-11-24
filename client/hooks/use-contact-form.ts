@@ -10,21 +10,36 @@ import type {
 async function submitContactForm(
   data: ContactFormData
 ): Promise<ContactFormResponse> {
-  const response = await fetch("/api/contact", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-  const result = await response.json();
+    // Check if response has content before parsing JSON
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      const text = await response.text();
+      console.error("Non-JSON response:", text);
+      throw new Error("Server returned an invalid response. Please try again later.");
+    }
 
-  if (!response.ok) {
-    throw new Error(result.error || result.message || "Failed to send message");
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || result.message || "Failed to send message");
+    }
+
+    return result;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("Network error. Please check your connection and try again.");
   }
-
-  return result;
 }
 
 /**
