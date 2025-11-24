@@ -8,6 +8,7 @@ import {
   StaggerItem,
   HoverScale,
 } from "@/components/ui/animation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PricingPlan {
   icon: React.ComponentType<{ className?: string }>;
@@ -33,6 +34,7 @@ export function PricingSection({
   packagesRef,
   addonServicesRef,
 }: PricingSectionProps) {
+  const { t } = useLanguage();
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
   const [animatedPrices, setAnimatedPrices] = useState({
     starterOneTime: 0,
@@ -52,64 +54,76 @@ export function PricingSection({
   const pricingPlans: PricingPlan[] = [
     {
       icon: Heart,
-      title: "Starter",
-      description: "Ideal for simple, yet professional web presences",
-      oneTime: 790,
+      title: t("pricing.starter.title"),
+      description: t("pricing.starter.description"),
+      oneTime: 890,
       annual: 290,
       features: [
-        "Up to 3 content pages",
-        "Responsive design",
-        "4 royalty-free images",
-        "4 content updates per year",
-        ".ch domain with SSL",
-        "Basic SEO",
+        t("pricing.starter.feature1"),
+        t("pricing.starter.feature2"),
+        t("pricing.starter.feature3"),
+        t("pricing.starter.feature4"),
+        t("pricing.starter.feature5"),
+        t("pricing.starter.feature6"),
+        t("pricing.starter.feature7"),
       ],
     },
     {
       icon: Zap,
-      title: "Business",
-      description: "Ideal for simple, yet professional web presences",
-      oneTime: 1490,
-      annual: 390,
+      title: t("pricing.business.title"),
+      description: t("pricing.business.description"),
+      oneTime: 3290,
+      annual: 590,
       features: [
-        "Everything from the Starter Package",
-        "Up to 7 content pages",
-        "Contact form & Google Maps",
-        "Newsletter integration",
-        "Custom design",
-        "GDPR-compliant privacy policy",
+        t("pricing.business.feature1"),
+        t("pricing.business.feature2"),
+        t("pricing.business.feature3"),
+        t("pricing.business.feature4"),
+        t("pricing.business.feature5"),
+        t("pricing.business.feature6"),
+        t("pricing.business.feature7"),
+        t("pricing.business.feature8"),
       ],
     },
     {
       icon: Crown,
-      title: "E-Comm & Pro Marketing",
-      description: "Ideal for simple, yet professional web presences",
-      oneTime: 790,
-      annual: 290,
+      title: t("pricing.ecomm.title"),
+      description: t("pricing.ecomm.description"),
+      oneTime: 0,
+      annual: 0,
       features: [
-        "Everything from the Business Package",
-        "Online shop with product management",
-        "Payment & shipping solutions",
-        "Marketing support & campaign track",
-        "Data protection inc cookie banner",
-        "Monthly reporting",
+        t("pricing.ecomm.feature1"),
+        t("pricing.ecomm.feature2"),
+        t("pricing.ecomm.feature3"),
+        t("pricing.ecomm.feature4"),
+        t("pricing.ecomm.feature5"),
+        t("pricing.ecomm.feature6"),
+        t("pricing.ecomm.feature7"),
       ],
     },
   ];
 
   const addonServices: AddonService[] = [
-    { name: "Logo Design", icons: [Heart, Zap, Crown], price: "390" },
     {
-      name: "Professional copywriting",
+      name: t("pricing.addons.logoDesign"),
+      icons: [Heart, Zap, Crown],
+      price: "390",
+    },
+    {
+      name: t("pricing.addons.copywriting"),
       icons: [Heart, Zap, Crown],
       price: "120",
     },
     {
-      name: "Data Protection Consult",
+      name: t("pricing.addons.dataProtection"),
       icons: [Heart, Zap, Crown],
       price: "180",
     },
-    { name: "Multilingual Support", icons: [Heart, Zap, Crown], price: "490" },
+    {
+      name: t("pricing.addons.multilingual"),
+      icons: [Heart, Zap, Crown],
+      price: "490",
+    },
   ];
 
   useEffect(() => {
@@ -125,10 +139,10 @@ export function PricingSection({
         const progress = step / steps;
 
         setAnimatedPrices({
-          starterOneTime: Math.floor(790 * progress),
+          starterOneTime: Math.floor(890 * progress),
           starterAnnual: Math.floor(290 * progress),
-          businessOneTime: Math.floor(1490 * progress),
-          businessAnnual: Math.floor(390 * progress),
+          businessOneTime: Math.floor(3290 * progress),
+          businessAnnual: Math.floor(590 * progress),
           ecommOneTime: Math.floor(790 * progress),
           ecommAnnual: Math.floor(290 * progress),
         });
@@ -136,10 +150,10 @@ export function PricingSection({
         if (step >= steps) {
           clearInterval(timer);
           setAnimatedPrices({
-            starterOneTime: 790,
+            starterOneTime: 890,
             starterAnnual: 290,
-            businessOneTime: 1490,
-            businessAnnual: 390,
+            businessOneTime: 3290,
+            businessAnnual: 590,
             ecommOneTime: 790,
             ecommAnnual: 290,
           });
@@ -191,12 +205,12 @@ export function PricingSection({
         <FadeInUp className="text-center mb-12 sm:mb-16">
           <FadeInUp delay={0.2} className="mb-4">
             <span className="text-primary-500 text-lg sm:text-xl font-grotesk tracking-wide">
-              Our Packages
+              {t("pricing.badge")}
             </span>
           </FadeInUp>
           <FadeInUp delay={0.4}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold font-grotesk text-secondary-900 tracking-tight">
-              Let's build something great together
+              {t("pricing.title")}
             </h2>
           </FadeInUp>
         </FadeInUp>
@@ -206,7 +220,7 @@ export function PricingSection({
             <StaggerItem key={index}>
               <HoverScale>
                 <Card
-                  className={`bg-secondary-100 border-0 rounded-xl p-6 sm:p-8 h-auto sm:h-[785px] transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                  className={`bg-secondary-100 flex flex-col justify-between border-0 rounded-xl p-6 sm:p-8 h-auto min-h-[950px] transition-all duration-300 hover:scale-105 hover:shadow-lg ${
                     hoveredPlan === index
                       ? "shadow-xl shadow-purple-500/10"
                       : ""
@@ -215,8 +229,8 @@ export function PricingSection({
                   onMouseLeave={() => setHoveredPlan(null)}
                 >
                   <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                    <plan.icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary-500" />
-                    <h3 className="text-2xl sm:text-[28px] font-semibold font-grotesk whitespace-nowrap text-secondary-700">
+                    <plan.icon className="w-[50px] h-[50px] text-primary-500" />
+                    <h3 className="text-2xl sm:text-[28px] font-semibold font-grotesk  text-secondary-700">
                       {plan.title}
                     </h3>
                   </div>
@@ -226,29 +240,39 @@ export function PricingSection({
                   </p>
 
                   <div className="mb-4 sm:mb-6">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-3xl sm:text-4xl font-semibold font-grotesk text-secondary-700">
-                        {index === 0 &&
-                          animatedPrices.starterOneTime.toLocaleString()}
-                        {index === 1 &&
-                          animatedPrices.businessOneTime.toLocaleString()}
-                        {index === 2 &&
-                          animatedPrices.ecommOneTime.toLocaleString()}
-                      </span>
-                      <span className="text-base sm:text-lg font-grotesk text-secondary-400">
-                        CHF one time
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-3xl sm:text-4xl font-semibold font-grotesk text-secondary-700">
-                        {index === 0 && animatedPrices.starterAnnual}
-                        {index === 1 && animatedPrices.businessAnnual}
-                        {index === 2 && animatedPrices.ecommAnnual}
-                      </span>
-                      <span className="text-base sm:text-lg font-grotesk text-secondary-400">
-                        CHF annually
-                      </span>
-                    </div>
+                    {index === 2 ? (
+                      <div className="text-center py-4">
+                        <p className="text-lg sm:text-xl font-semibold font-grotesk text-secondary-700 mb-2">
+                          {t("pricing.ecomm.customizable")}
+                        </p>
+                        <p className="text-base sm:text-lg font-grotesk text-secondary-400">
+                          {t("pricing.ecomm.priceOnRequest")}
+                        </p>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-3xl sm:text-4xl font-semibold font-grotesk text-secondary-700">
+                            {index === 0 &&
+                              animatedPrices.starterOneTime.toLocaleString()}
+                            {index === 1 &&
+                              animatedPrices.businessOneTime.toLocaleString()}
+                          </span>
+                          <span className="text-base sm:text-lg font-grotesk text-secondary-400">
+                            CHF {t("pricing.starter.oneTime")}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-3xl sm:text-4xl font-semibold font-grotesk text-secondary-700">
+                            {index === 0 && animatedPrices.starterAnnual}
+                            {index === 1 && animatedPrices.businessAnnual}
+                          </span>
+                          <span className="text-base sm:text-lg font-grotesk text-secondary-400">
+                            CHF {t("pricing.starter.annual")}
+                          </span>
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   <div className="mb-6 sm:mb-8">
@@ -275,7 +299,7 @@ export function PricingSection({
                   </div>
 
                   <Button className="w-full bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white py-3 rounded-full font-grotesk mt-auto text-sm sm:text-base hover:scale-105 transition-transform duration-200">
-                    Let's start
+                    {index === 2 ? t("pricing.ecomm.cta") : t("pricing.cta")}
                   </Button>
                 </Card>
               </HoverScale>
@@ -290,7 +314,7 @@ export function PricingSection({
             className="text-center mb-6 sm:mb-8"
           >
             <h3 className="text-xl sm:text-2xl font-semibold font-grotesk text-secondary-900">
-              Add-on Services
+              {t("pricing.addons.title")}
             </h3>
           </div>
         </FadeInUp>
@@ -308,12 +332,12 @@ export function PricingSection({
                       />
                     ))}
                   </div>
-                  <h4 className="text-lg sm:text-xl font-semibold font-grotesk text-secondary-700 mb-6 sm:mb-8">
+                  <h4 className="text-lg sm:text-xl font-semibold font-grotesk text-secondary-700 mb-6 sm:mb-8 whitespace-nowrap">
                     {service.name}
                   </h4>
                   <div className="flex items-center justify-between">
                     <p className="text-base sm:text-lg font-grotesk text-secondary-400 mt-2">
-                      Starting from:
+                      {t("pricing.addons.startingFrom")}
                     </p>
                     <div>
                       <span className="text-sm sm:text-base font-grotesk text-secondary-400 mr-2">

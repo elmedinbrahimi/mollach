@@ -5,12 +5,14 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/ui/animation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ServicesHeroSectionProps {
   heroRef: React.RefObject<HTMLDivElement>;
 }
 
 export function ServicesHeroSection({ heroRef }: ServicesHeroSectionProps) {
+  const { t } = useLanguage();
   return (
     <section
       ref={heroRef}
@@ -42,10 +44,10 @@ export function ServicesHeroSection({ heroRef }: ServicesHeroSectionProps) {
 
             <FadeInUp delay={0.4}>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-grotesk text-secondary-900 leading-tight">
-                Tailored Digital Services
+                {t("servicesHero.title")}
                 <br />
                 <span className="text-secondary-700 relative">
-                  for Swiss Businesses
+                  {t("servicesHero.subtitle")}
                   <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-primary-500 to-purple-600 rounded-full"></div>
                 </span>
               </h1>
@@ -60,7 +62,7 @@ export function ServicesHeroSection({ heroRef }: ServicesHeroSectionProps) {
 
             <FadeInUp delay={0.8}>
               <Button className="bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform duration-200 text-lg">
-                Get A Free Consultation
+                {t("servicesHero.cta")}
               </Button>
             </FadeInUp>
           </div>

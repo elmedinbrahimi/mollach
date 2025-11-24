@@ -6,6 +6,8 @@ import { ServicesSection } from "@/components/sections/ServicesSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/sections/Footer";
 import { PricingSection } from "@/components/sections/PricingSection";
+import { WhatWereBestAtSection } from "@/components/sections/WhatWereBestAtSection";
+import { AddOnServicesSection } from "@/components/sections/AddOnServicesSection";
 
 export default function Index() {
   const {
@@ -28,11 +30,14 @@ export default function Index() {
 
       <HeroSection heroRef={heroRef} />
       <WhyMollaSection whyMollaRef={whyMollaRef} />
-      <ServicesSection servicesRef={servicesRef} />
-      <PricingSection
+      {/* <ServicesSection servicesRef={servicesRef} /> */}
+      <WhatWereBestAtSection servicesRef={servicesRef} />
+      {/* <PricingSection
         packagesRef={packagesRef}
         addonServicesRef={addonServicesRef}
-      />
+      /> */}
+      <AddOnServicesSection addonServicesRef={addonServicesRef} />
+
       <CTASection journeyRef={journeyRef} />
       <Footer />
     </div>

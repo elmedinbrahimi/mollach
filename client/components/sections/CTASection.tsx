@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   FadeInUp,
   StaggerContainer,
@@ -69,9 +70,11 @@ export function CTASection({ journeyRef }: CTASectionProps) {
 
             <StaggerItem>
               <HoverScale>
-                <Button className="bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white px-8 sm:px-12 py-3 rounded-full font-grotesk text-sm sm:text-base hover:scale-105 transition-transform duration-200">
-                  {t("contact.cta")}
-                </Button>
+                <Link to="/contact">
+                  <Button className="bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white px-8 sm:px-12 py-3 rounded-full font-grotesk text-sm sm:text-base hover:scale-105 transition-transform duration-200">
+                    {t("contact.cta")}
+                  </Button>
+                </Link>
               </HoverScale>
             </StaggerItem>
           </StaggerContainer>

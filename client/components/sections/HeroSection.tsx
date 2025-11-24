@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import bg from "../../../assets/background.png";
 import {
   FadeInUp,
@@ -95,14 +96,6 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
       <div className="relative z-10 container mx-auto px-4 sm:px-8 md:px-16 pt-16 sm:pt-20 md:pt-24">
         {/* Hero Content */}
         <FadeInUp className="max-w-[969px] flex justify-center items-center flex-col mx-auto text-center mb-12 sm:mb-16">
-          {/* Badge */}
-          <FadeInUp delay={0.2} className="mb-4">
-            <p className="text-[#C3C3C3] text-center flex items-center text-base sm:text-lg">
-              <span>🇨🇭</span>
-              {t("hero.badge")}
-            </p>
-          </FadeInUp>
-
           {/* Main Heading */}
           <FadeInUp delay={0.4} className="mb-4">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium font-grotesk text-white leading-tight tracking-tight px-4">
@@ -117,9 +110,11 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
           </FadeInUp>
 
           <FadeInScale delay={0.8}>
-            <Button className="bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white px-8 sm:px-12 py-3 rounded-full font-grotesk mb-6 sm:mb-8 text-sm sm:text-base hover:scale-105 transition-transform duration-200">
-              {t("hero.cta")}
-            </Button>
+            <Link to="/contact">
+              <Button className="bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white px-8 sm:px-12 py-3 rounded-full font-grotesk mb-6 sm:mb-8 text-sm sm:text-base hover:scale-105 transition-transform duration-200">
+                {t("hero.cta")}
+              </Button>
+            </Link>
           </FadeInScale>
         </FadeInUp>
 

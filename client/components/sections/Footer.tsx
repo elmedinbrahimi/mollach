@@ -3,12 +3,15 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/ui/animation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Footer() {
+  const { t } = useLanguage();
+
   const footerLinks = {
-    services: ["Blog", "Pricing", "FAQ", "Events", "Ebook & Guide"],
+    servicesKeys: ["footer.blog", "footer.pricing", "footer.faq", "footer.events", "footer.ebook"],
     socials: ["LinkedIn", "Twitter", "Instagram", "Facebook", "YouTube"],
-    legal: ["Privacy Policy", "Terms & Conditions", "Cookie Policy"],
+    legalKeys: ["footer.privacyPolicy", "footer.terms", "footer.cookiePolicy"],
   };
 
   return (
@@ -26,14 +29,14 @@ export function Footer() {
             </FadeInUp>
             <FadeInUp delay={0.4}>
               <p className="text-base sm:text-lg font-grotesk text-secondary-400 leading-relaxed max-w-sm">
-                Your Full-Service Digital Agency in Switzerland
+                {t("footer.tagline")}
                 <br />
                 <br />
-                Address:
+                {t("footer.address")}
                 <br />
-                Contact:
+                {t("footer.contact")}
                 <br />
-                Phone:
+                {t("footer.phone")}
               </p>
             </FadeInUp>
           </StaggerItem>
@@ -44,17 +47,17 @@ export function Footer() {
             <div className="w-full">
               <FadeInUp delay={0.6}>
                 <h4 className="text-lg sm:text-xl font-semibold font-grotesk text-secondary-500 mb-6 sm:mb-8">
-                  Services
+                  {t("footer.services")}
                 </h4>
               </FadeInUp>
               <StaggerContainer className="space-y-4 sm:space-y-6 text-red-500">
-                {footerLinks.services.map((item, index) => (
+                {footerLinks.servicesKeys.map((itemKey, index) => (
                   <StaggerItem key={index}>
                     <a
                       href="#"
                       className="block text-sm sm:text-base font-grotesk text-secondary-400 hover:text-secondary-700 transition-colors duration-200"
                     >
-                      {item}
+                      {t(itemKey)}
                     </a>
                   </StaggerItem>
                 ))}
@@ -66,7 +69,7 @@ export function Footer() {
             <div className="w-full">
               <FadeInUp delay={0.8}>
                 <h4 className="text-lg sm:text-xl font-semibold font-grotesk text-secondary-500 mb-6 sm:mb-8">
-                  Socials
+                  {t("footer.socials")}
                 </h4>
               </FadeInUp>
               <StaggerContainer className="space-y-4 sm:space-y-6">
@@ -88,15 +91,15 @@ export function Footer() {
         <div className="border-t border-primary-200 pt-6 sm:pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
-              {footerLinks.legal.map((item, index) => (
+              {footerLinks.legalKeys.map((itemKey, index) => (
                 <div key={index} className="flex items-center">
                   <a
                     href="#"
                     className="text-sm sm:text-base font-grotesk text-secondary-400 hover:text-secondary-700 transition-colors duration-200"
                   >
-                    {item}
+                    {t(itemKey)}
                   </a>
-                  {index < footerLinks.legal.length - 1 && (
+                  {index < footerLinks.legalKeys.length - 1 && (
                     <span className="text-secondary-400 mx-2 sm:mx-4 hidden sm:inline">
                       |
                     </span>

@@ -8,14 +8,15 @@ import {
   StaggerItem,
   HoverScale,
 } from "@/components/ui/animation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PricingPlan {
   icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   oneTime: number;
   annual: number;
-  features: string[];
+  featureKeys: string[];
   popular?: boolean;
 }
 
@@ -24,6 +25,7 @@ interface ServicesPricingSectionProps {
 }
 
 export function ServicesPricingSection({ packagesRef }: ServicesPricingSectionProps) {
+  const { t } = useLanguage();
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
   const [animatedPrices, setAnimatedPrices] = useState({
     starterOneTime: 0,
@@ -37,48 +39,48 @@ export function ServicesPricingSection({ packagesRef }: ServicesPricingSectionPr
   const pricingPlans: PricingPlan[] = [
     {
       icon: Heart,
-      title: "Starter",
-      description: "Ideal for basic businesses just getting started online",
+      titleKey: "servicesPricing.starter.title",
+      descriptionKey: "servicesPricing.starter.description",
       oneTime: 790,
       annual: 290,
-      features: [
-        "Up to 3 content pages",
-        "Responsive design",
-        "4 royalty-free images",
-        "4 content updates per year",
-        ".ch domain with SSL",
-        "Basic SEO",
+      featureKeys: [
+        "servicesPricing.starter.feature1",
+        "servicesPricing.starter.feature2",
+        "servicesPricing.starter.feature3",
+        "servicesPricing.starter.feature4",
+        "servicesPricing.starter.feature5",
+        "servicesPricing.starter.feature6",
       ],
     },
     {
       icon: Zap,
-      title: "Business",
-      description: "Everything from the Starter Package",
+      titleKey: "servicesPricing.business.title",
+      descriptionKey: "servicesPricing.business.description",
       oneTime: 1490,
       annual: 390,
       popular: true,
-      features: [
-        "Everything from the Starter Package",
-        "Up to 7 content pages",
-        "Contact form & Google Maps",
-        "Newsletter integration",
-        "Custom design",
-        "GDPR-compliant privacy policy",
+      featureKeys: [
+        "servicesPricing.business.feature1",
+        "servicesPricing.business.feature2",
+        "servicesPricing.business.feature3",
+        "servicesPricing.business.feature4",
+        "servicesPricing.business.feature5",
+        "servicesPricing.business.feature6",
       ],
     },
     {
       icon: Crown,
-      title: "E-Comm & Pro Marketing",
-      description: "Everything from the Business Package",
+      titleKey: "servicesPricing.ecomm.title",
+      descriptionKey: "servicesPricing.ecomm.description",
       oneTime: 790,
       annual: 290,
-      features: [
-        "Everything from the Business Package",
-        "Online shop with product management",
-        "Payment & shipping solutions",
-        "Marketing support & campaign track",
-        "Data protection inc cookie banner",
-        "Monthly reporting",
+      featureKeys: [
+        "servicesPricing.ecomm.feature1",
+        "servicesPricing.ecomm.feature2",
+        "servicesPricing.ecomm.feature3",
+        "servicesPricing.ecomm.feature4",
+        "servicesPricing.ecomm.feature5",
+        "servicesPricing.ecomm.feature6",
       ],
     },
   ];
@@ -127,12 +129,12 @@ export function ServicesPricingSection({ packagesRef }: ServicesPricingSectionPr
         <FadeInUp className="text-center mb-12 sm:mb-16">
           <FadeInUp delay={0.1} className="mb-4">
             <span className="text-primary-500 text-lg sm:text-xl font-grotesk tracking-wide">
-              Our Packages
+              {t("servicesPricing.badge")}
             </span>
           </FadeInUp>
           <FadeInUp delay={0.2} className="mb-6">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-grotesk text-secondary-900 tracking-tight">
-              Perfect for every business
+              {t("servicesPricing.title")}
             </h2>
           </FadeInUp>
         </FadeInUp>
@@ -155,7 +157,7 @@ export function ServicesPricingSection({ packagesRef }: ServicesPricingSectionPr
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                       <div className="bg-gradient-to-r from-[#472F91] to-[#8F278F] text-white px-4 py-2 rounded-full text-sm font-medium">
-                        Most Popular
+                        {t("servicesPricing.mostPopular")}
                       </div>
                     </div>
                   )}
@@ -163,12 +165,12 @@ export function ServicesPricingSection({ packagesRef }: ServicesPricingSectionPr
                   <div className="flex items-center gap-3 mb-4 sm:mb-6">
                     <plan.icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary-500" />
                     <h3 className="text-2xl sm:text-[28px] font-semibold font-grotesk text-secondary-700">
-                      {plan.title}
+                      {t(plan.titleKey)}
                     </h3>
                   </div>
 
                   <p className="text-sm sm:text-base font-grotesk text-secondary-400 mb-6 sm:mb-8">
-                    {plan.description}
+                    {t(plan.descriptionKey)}
                   </p>
 
                   <div className="mb-4 sm:mb-6">
@@ -179,7 +181,7 @@ export function ServicesPricingSection({ packagesRef }: ServicesPricingSectionPr
                         {index === 2 && animatedPrices.ecommOneTime.toLocaleString()}
                       </span>
                       <span className="text-base sm:text-lg font-grotesk text-secondary-400">
-                        CHF one time
+                        {t("servicesPricing.oneTime")}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -189,14 +191,14 @@ export function ServicesPricingSection({ packagesRef }: ServicesPricingSectionPr
                         {index === 2 && animatedPrices.ecommAnnual}
                       </span>
                       <span className="text-base sm:text-lg font-grotesk text-secondary-400">
-                        CHF annually
+                        {t("servicesPricing.annually")}
                       </span>
                     </div>
                   </div>
 
                   <div className="mb-6 sm:mb-8">
                     <div className="space-y-4 sm:space-y-6">
-                      {plan.features.map((feature, featureIndex) => (
+                      {plan.featureKeys.map((featureKey, featureIndex) => (
                         <div
                           key={featureIndex}
                           className="flex items-start gap-3"
@@ -207,7 +209,7 @@ export function ServicesPricingSection({ packagesRef }: ServicesPricingSectionPr
                               featureIndex === 0 ? "font-semibold" : ""
                             }`}
                           >
-                            {feature}
+                            {t(featureKey)}
                           </span>
                         </div>
                       ))}
@@ -219,7 +221,7 @@ export function ServicesPricingSection({ packagesRef }: ServicesPricingSectionPr
                       ? 'bg-gradient-to-r from-[#472F91] to-[#8F278F]'
                       : 'bg-gradient-to-r from-[#472F91] to-[#8F278F]'
                   }`}>
-                    Get Started
+                    {t("servicesPricing.getStarted")}
                   </Button>
                 </Card>
               </HoverScale>

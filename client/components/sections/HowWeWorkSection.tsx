@@ -3,12 +3,14 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/ui/animation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface HowWeWorkSectionProps {
   whyMollaRef: React.RefObject<HTMLDivElement>;
 }
 
 export function HowWeWorkSection({ whyMollaRef }: HowWeWorkSectionProps) {
+  const { t } = useLanguage();
   return (
     <section
       ref={whyMollaRef}
@@ -19,22 +21,19 @@ export function HowWeWorkSection({ whyMollaRef }: HowWeWorkSectionProps) {
         <div className="text-center mb-20">
           <FadeInUp delay={0.2}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-grotesk text-white mb-6">
-              How we work
+              {t("howWeWork.title")}
             </h2>
           </FadeInUp>
 
           <FadeInUp delay={0.4}>
             <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              At Molla.ch, we offer comprehensive digital services designed to help your business stand out online. Whether
-              you need a modern website, a secure online shop, impactful marketing campaigns, or expert data protection
-              support - we provide solutions that are fully adapted to your needs and compliant with Swiss standards.
+              {t("howWeWork.description1")}
             </p>
           </FadeInUp>
 
           <FadeInUp delay={0.6} className="mt-8">
             <p className="text-base text-gray-400 max-w-3xl mx-auto">
-              We follow a holistic approach from strategy and design to execution and ongoing support. Our team
-              ensures every solution is not only visually impressive but also functional, scalable, and results-driven.
+              {t("howWeWork.description2")}
             </p>
           </FadeInUp>
         </div>

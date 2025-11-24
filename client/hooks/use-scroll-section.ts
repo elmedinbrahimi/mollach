@@ -10,6 +10,8 @@ export function useScrollSection() {
   const journeyRef = useRef<HTMLDivElement>(null);
   const packagesRef = useRef<HTMLDivElement>(null);
   const addonServicesRef = useRef<HTMLDivElement>(null);
+  const contactFormRef = useRef<HTMLDivElement>(null);
+  const contactInfoRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,6 +19,7 @@ export function useScrollSection() {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const isServicesPage = location.pathname === "/services";
+      const isContactPage = location.pathname === "/contact";
 
       // Get section positions
       const heroTop = heroRef.current?.offsetTop || 0;
@@ -29,8 +32,24 @@ export function useScrollSection() {
       const journeyTop = journeyRef.current?.offsetTop || 0;
       const journeyBottom =
         journeyTop + (journeyRef.current?.offsetHeight || 0);
+      const contactFormTop = contactFormRef.current?.offsetTop || 0;
+      const contactInfoTop = contactInfoRef.current?.offsetTop || 0;
+      const contactInfoBottom =
+        contactInfoTop + (contactInfoRef.current?.offsetHeight || 0);
 
-      if (isServicesPage) {
+      if (isContactPage) {
+        // Contact page logic
+        // Hero section has dark background
+        // Form section has white background
+        // Info section has dark background
+        const isOverContactInfo =
+          scrollY + 100 >= contactInfoTop && scrollY + 100 <= contactInfoBottom;
+        setIsOverContact(isOverContactInfo);
+
+        // Header should be light when over form section, dark elsewhere
+        const isOverForm = scrollY + 100 >= contactFormTop && scrollY + 100 < contactInfoTop;
+        setIsDarkBackground(!isOverForm && !isOverContactInfo);
+      } else if (isServicesPage) {
         // Services page logic
         // Check if over Contact section (Footer)
         const isOverContactSection =
@@ -82,5 +101,7 @@ export function useScrollSection() {
     journeyRef,
     packagesRef,
     addonServicesRef,
+    contactFormRef,
+    contactInfoRef,
   };
 }
