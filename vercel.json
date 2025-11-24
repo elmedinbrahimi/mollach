@@ -1,7 +1,5 @@
 {
-  "buildCommand": "npm run build:client",
   "outputDirectory": "dist/spa",
-  "installCommand": "npm ci",
   "framework": null,
   "rewrites": [
     {
