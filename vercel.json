@@ -1,7 +1,7 @@
 {
-  "buildCommand": "pnpm run build:client",
+  "buildCommand": "npm run build:client",
   "outputDirectory": "dist/spa",
-  "installCommand": "pnpm install --frozen-lockfile --prefer-offline",
+  "installCommand": "npm ci",
   "framework": null,
   "rewrites": [
     {
